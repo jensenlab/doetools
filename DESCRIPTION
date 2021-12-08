@@ -10,5 +10,12 @@ License: MIT
 Encoding: UTF-8
 LazyData: true
 Imports:
-    grid
+    grid,
+    dplyr
 RoxygenNote: 7.1.1
+Suggests: 
+    rmarkdown,
+    knitr,
+    daewr,
+    rsm
+VignetteBuilder: knitr

@@ -2,41 +2,118 @@
 % Please edit documentation in R/farplot.R
 \name{farplot}
 \alias{farplot}
+\alias{farplot.data.frame}
+\alias{farplot.lm}
+\alias{farplot.rsm}
 \title{Plot factors and a response.}
 \usage{
-farplot(
-  data,
-  response = NULL,
-  factors = NULL,
-  size = 1,
-  pch = 19,
-  factor_colors = c("red", "black"),
-  normalize = "all",
-  size_transform = sqrt,
-  extension = 0.05
-)
+farplot(...)
+
+\method{farplot}{data.frame}(data, response, factors = NULL, ...)
+
+\method{farplot}{lm}(model, data = NULL, show_prediction = TRUE, ...)
+
+\method{farplot}{rsm}(model, show_prediction = TRUE, ...)
 }
 \arguments{
-\item{data}{Data frame.}
+\item{data}{Data frame with factors and the response.}
 
-\item{response}{Name of response column. `NULL` uses the last column.}
+\item{response}{color Color of the response character. Default: \code{"orange"}.}
 
-\item{factors}{Names of factor columns. `NULL` selects all columns except `response`.}
+\item{factors}{Names of factor to plot \code{NULL} selects all columns except \code{response}.}
 
-\item{size}{Default size, in `char`, or the response symbols. Reduce this if symbols overlap.}
+\item{show_prediction}{If true (default), make and display predictions for \code{lm} and \code{rsm}
+objects.}
 
-\item{pch}{Symbol type for response.}
+\item{factor_type}{A character vector of the display type (\code{"sign"}, \code{"continuous"},
+or \code{"factor"}) for each factor. By default, the function \code{guess_factor_type} finds
+factor types using the above rules and the classes of the columns in \code{factors}.}
 
-\item{factor_colors}{Colors for negative and positive factors.}
+\item{factor_colors}{A 3-item vector specifying the colors for negative, zero, and positive symbols.
+Default: negative=red, zero=gray, positive=black.}
 
-\item{normalize}{If `"all"` (default), factor sizes are normalized to the largest single factor code.
-Otherwise, each row is normalized separately.}
+\item{color_signs}{If true (the default), the \code{-}, \code{0}, and \code{+} signs are colored
+using \code{factor_colors}.}
 
-\item{extension}{Axis extension factor; see `dataViewport`.}
+\item{label_chars}{Number of characters to use when abbreviating factor names. Numbers are added to
+make the factors unique. For example, if \code{label_chars=2} (the default), \code{"March"} and
+\code{"May"} are abbreviated \code{"Ma1"} and \code{"Ma2"}.}
 
-\item{size_tranform}{Function applied to convert factor codes to symbol sizes. Default is `sqrt`.
-`NULL` applies no transform.}
+\item{factor_size}{Default size, in \code{char}, of the factor symbols. Reduce this if symbols
+overlap. Default: 1.0.}
+
+\item{zero_size}{For continuous factors, zeros are displayed at this size. Setting this to zero make
+no symbol. Note that zeros for sign factors are displayed as the character \code{0} and are
+unaffected by this parameter. Default: 0.1.}
+
+\item{size_transform}{The symbol for a factor is drawn with \code{size=size_transform(level)} where
+\code{level} is the factor level. By default this is \code{sqrt} so the area of the symbol
+is proportional to the factor level. \code{NULL} applies no transform.}
+
+\item{normalize}{The levels of continuous factors can be normalized by row (\code{"row"}) or
+across all continuous factors in the dataframe (\code{"all"}). Default: \code{"all"}.}
+
+\item{order_response}{If true (default), sort the responses by \code{stat}.}
+
+\item{stack_replicates}{If true (default), responses for replicates are plotted above the same
+horizontal position, i.e. only unique treatments are shown on the horizontal.}
+
+\item{response_pch}{Plotting character for the response. Default: 19 (filled circle).}
+
+\item{response_size}{Size, in \code{char}, of the response. Default: 1.0.}
+
+\item{stat}{Statistic used to order responses. Default: \code{\link{mean}}.}
+
+\item{show_stat}{If true, shows the \code{stat} value for the responses.
+By default, the stat is shown if at least one treatment is replicated and the responses
+are stacked.}
+
+\item{stat_pch}{Plotting character for the stat. Default: 95 (horizontal line).}
+
+\item{stat_size}{Size, in \code{char}, of the stat. Default: 0.5.}
+
+\item{stat_color}{Color of the stat character. Default: \code{"black"}.}
+
+\item{prediction_pch}{Plotting character for the prediction Default: 19 (filled circle).}
+
+\item{prediction_size}{Size, in \code{char}, of the prediction. Default: 0.5.}
+
+\item{prediction_color}{Color of the prediction character. Default: \code{"gray"}.}
+
+\item{extension}{Axis extension factor; see \code{\link{dataViewport}}.}
 }
 \description{
-Plot factors and a response.
+Shows a continuous response variable and the corresponding treatments (factor levels) for a designed
+experiment or a linear model.
+}
+\details{
+\code{farplot} has three methods for displaying factors:
+\itemize{
+  \item{\bold{sign} shows a \code{-}, \code{0}, or \code{+} character based on the sign of the factor.
+    This can be used for 2- and 3-level factorials. \code{R} factors are assigned a sign based on their
+    character representation: \code{"-"}, and \code{"-1"} are negative, \code{"0"} is zero, and \code{"+"},
+    \code{"1"}, and \code{"+1"} are positive.}
+  \item{\bold{continuous} factors are shown as circles with sizes proportional to the factor level.
+    Colors distinguish negative, zero, and positive values, with red, gray, and black defaults
+    (the same as for signs).}
+  \item{\bold{factors} show non-numeric data (factors or strings) by abbreviating the factor level.}
+}
+By default, \code{farplot} guesses the factor based on the class and contents of each factor.
+\itemize{
+  \item{A \code{numeric} or \code{integer} vector is displayed as \bold{continuous} unless the vector
+    only contains the values -1, 0, or 1, in which case it is displayed as a \bold{sign}.}
+  \item{All other types (e.g. \code{factor}, \code{character}) are displayed as a \bold{factor}.}
+}
+}
+\section{Methods (by class)}{
+\itemize{
+\item \code{data.frame}: Base method for dataframes of factors
+
+\item \code{lm}: The `data` argument can be used to provide the original factors; otherwise the data will be pulled from the original call.
+
+\item \code{rsm}: For response surface models created with `rsm::rsm`
+}}
+
+\author{
+Paul Jensen, \email{software@jensenlab.net}
 }

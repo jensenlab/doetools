@@ -1,0 +1,96 @@
+---
+title: "Factor-and-response plots  (farplots)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{farplot-tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 7
+)
+```
+
+```{r setup}
+library(doetools)
+library(daewr)
+```
+
+## Example
+
+Let's start with a factorial experiment for a chemical process. All the data in this vignette are from the `daewr` package that accompanies the book *Design and Analysis of Experiments with R* by John Lawson.
+
+```{r}
+data(chem)
+chem
+```
+
+The design is a saturated full factorial with 16 runs for four factors (A, B, C, and D). The response `y` is continuous. Let's make a simple factor and response plot using `farplot`.
+
+```{r}
+farplot(chem, response="y")
+```
+The main panel of the graph is the response variable, with all treatments (factor settings) below. By default the response is displayed in ascending order. The option `order_response=FALSE` will keep the run in their original order. The `response` name is required so ``farplot` can identify the correct response column in the dataframe.
+
+You can select which factors to display with the `factors` option. This is useful when you dataframe contains columns that are not treatments.
+
+## Displaying factors
+
+`farplot` has three methods for displaying factors:
+  - **sign** shows a `-`, `0`, or `+` character based on the sign of the factor. This can be used for 2- and 3-level factorials. `R` factors are assigned a sign based on their character representation: `"-"`, and `"-1"` are negative, `"0"` is zero, and `"+"`, `"1"`, and `"+1"` are positive.
+  - **continuous** factors are shown as circles with sizes proportional to the factor level. Colors distinguish negative, zero, and positive values, with red, gray, and black defaults (the same as for signs).
+  - **factors** show non-numeric data (factors or strings) by abbreviating the factor level.
+  
+You can specify the factor type for each factor:
+```{r}
+farplot(chem, response="y", factor_type=c("sign", "continuous", "sign", "factor"))
+```
+
+By default, `farplot` guesses the factor based on the class and contents of each factor.
+  - A `numeric` or `integer` vector is displayed as **continuous** unless the vector only contains the values -1, 0, or 1, in which case it is displayed as a **sign**.
+  - All other types (e.g. `factor`, `character`) are displayed as a **factor**.
+
+## Replicates
+
+The `eptaxr` dataset includes a replicated 2-level design.
+```{r}
+data(eptaxr)
+eptaxr
+```
+`farplot` will group the replicates and only display unique treatments along the horizontal.
+```{r}
+farplot(eptaxr, response="y")
+```
+The responses are ordered by the mean of the replicates, and the mean is shown with a horizontal line. You can change the function used for ordering with the `stat` option, and you can turn off the grouping of replicates by setting `stack_replicates=FALSE`.
+
+```{r}
+farplot(eptaxr, response="y", stack_replicates=FALSE)
+```
+
+## Models and prediction
+
+`farplot` displays both designs and predictions from linear models. Let's build a main effects model from the `eptaxr` data.
+
+```{r}
+eptaxr_model <- lm(y ~ A+B+C+D+E, data=eptaxr)
+farplot(eptaxr_model)
+```
+Notice how we called `farplot` directly on the linear model. In doing so, we didn't need to specify the response, the factor names, or the data. `farplot` extracts this information from the model object. The grey circles on the plot are the predicted values from the model.
+
+`farplot` handles response surface models created with the `rsm` package. Here's an example with the cement dataset.
+```{r}
+data(cement)
+cement_model <- rsm::rsm(y ~ SO(x1,x2,x3) + Block, data=cement)
+farplot(cement_model)
+```
+
+## Customizing plots
+
+The size, shape, and colors of the factors and responses can be customized with options to `farplot`. See the documentation for descriptions and defaults.
+
+
