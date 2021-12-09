@@ -162,7 +162,7 @@ farplot.rsm <- function(model, factors=NULL, show_prediction=TRUE, ...) {
   }
   factors <- data[ ,factor_names, drop=FALSE]
 
-  make_farplot(data, response, prediction, response_name=response_name, ...)
+  make_farplot(factors, response, prediction, response_name=response_name, ...)
 }
 
 sign_ <- function(x) {
