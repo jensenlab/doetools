@@ -113,7 +113,7 @@ guess_factor_type <- function(factors, exclude=character(0)) {
 
 #' @describeIn farplot The `data` argument can be used to provide the original factors; otherwise the data will be pulled from the original call.
 #' @export
-farplot.lm <- function(model, data=NULL, show_prediction=TRUE, ...) {
+farplot.lm <- function(model, data=NULL, factors=NULL, show_prediction=TRUE, ...) {
   response_name <- get_response_name(model)
   if (is.null(data)) {
     # try to get it from the call
@@ -127,9 +127,13 @@ farplot.lm <- function(model, data=NULL, show_prediction=TRUE, ...) {
     prediction <- NULL
   }
 
-  # the dataframe from the original call might include columns that were
-  # not terms in the model; remove these
-  factor_names <- dimnames(attr(model$terms,"factors"))[[2]]
+  if (!is.null(factors)) {
+    factor_names <- factors
+  } else {
+    # the dataframe from the original call might include columns that were
+    # not terms in the model; remove these
+    factor_names <- dimnames(attr(model$terms,"factors"))[[2]]
+  }
   factors <- data[ ,factor_names, drop=FALSE]
 
   make_farplot(factors, response, prediction, response_name=response_name, ...)
@@ -137,7 +141,7 @@ farplot.lm <- function(model, data=NULL, show_prediction=TRUE, ...) {
 
 #' @describeIn farplot For response surface models created with `rsm::rsm`
 #' @export
-farplot.rsm <- function(model, show_prediction=TRUE, ...) {
+farplot.rsm <- function(model, factors=NULL, show_prediction=TRUE, ...) {
   response_name <- get_response_name(model)
   data <- model$data
   response <- data[[response_name]]
@@ -148,10 +152,14 @@ farplot.rsm <- function(model, show_prediction=TRUE, ...) {
     prediction <- NULL
   }
 
-  # the dataframe from the original call might include columns that were
-  # not terms in the model; remove these
-  candidates <- c(dimnames(attr(model$terms, "factors"))[[2]], unname(model$newlabs))
-  factor_names <- intersect(names(model$data), candidates)
+  if (!is.null(factors)) {
+    factor_names <- factors
+  } else {
+    # the dataframe from the original call might include columns that were
+    # not terms in the model; remove these
+    candidates <- c(dimnames(attr(model$terms, "factors"))[[2]], unname(model$newlabs))
+    factor_names <- intersect(names(model$data), candidates)
+  }
   factors <- data[ ,factor_names, drop=FALSE]
 
   make_farplot(data, response, prediction, response_name=response_name, ...)

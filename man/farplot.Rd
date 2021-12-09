@@ -11,9 +11,9 @@ farplot(...)
 
 \method{farplot}{data.frame}(data, response, factors = NULL, ...)
 
-\method{farplot}{lm}(model, data = NULL, show_prediction = TRUE, ...)
+\method{farplot}{lm}(model, data = NULL, factors = NULL, show_prediction = TRUE, ...)
 
-\method{farplot}{rsm}(model, show_prediction = TRUE, ...)
+\method{farplot}{rsm}(model, factors = NULL, show_prediction = TRUE, ...)
 }
 \arguments{
 \item{data}{Data frame with factors and the response.}
