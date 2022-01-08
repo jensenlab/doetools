@@ -52,7 +52,7 @@
 #'   horizontal position, i.e. only unique treatments are shown on the horizontal.
 #' @param response_pch Plotting character for the response. Default: 19 (filled circle).
 #' @param response_size Size, in \code{char}, of the response. Default: 1.0.
-#' @param response color Color of the response character. Default: \code{"orange"}.
+#' @param response_color Color of the response character. Default: \code{"orange"}.
 #' @param stat Statistic used to order responses. Default: \code{\link{mean}}.
 #' @param show_stat If true, shows the \code{stat} value for the responses.
 #'   By default, the stat is shown if at least one treatment is replicated and the responses

@@ -18,7 +18,7 @@ farplot(...)
 \arguments{
 \item{data}{Data frame with factors and the response.}
 
-\item{response}{color Color of the response character. Default: \code{"orange"}.}
+\item{response}{Name of response column (default=\code{"response"}).}
 
 \item{factors}{Names of factor to plot \code{NULL} selects all columns except \code{response}.}
 
@@ -61,6 +61,8 @@ horizontal position, i.e. only unique treatments are shown on the horizontal.}
 \item{response_pch}{Plotting character for the response. Default: 19 (filled circle).}
 
 \item{response_size}{Size, in \code{char}, of the response. Default: 1.0.}
+
+\item{response_color}{Color of the response character. Default: \code{"orange"}.}
 
 \item{stat}{Statistic used to order responses. Default: \code{\link{mean}}.}
 
