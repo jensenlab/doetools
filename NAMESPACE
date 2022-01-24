@@ -3,5 +3,8 @@
 S3method(farplot,data.frame)
 S3method(farplot,lm)
 S3method(farplot,rsm)
+S3method(show_effects,default)
+S3method(show_effects,lm)
 export(farplot)
+export(show_effects)
 import(grid)
