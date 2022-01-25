@@ -7,7 +7,7 @@ align_numbers <- function(x, integer_digits=5, decimal_digits=5) {
 
   integer_char <- ifelse(use_sci, "", formatC(as.integer(abs(trunc(x)))))
 
-  dec_part <- abs(x - trunc(x))
+  dec_part <- round(abs(x - trunc(x)), decimal_digits)
   decs <- format(dec_part, scientific=FALSE, nsmall=decimal_digits, drop0trailing=TRUE)
   decimal_char <- substr(decs, 2, nchar(decs))
 
