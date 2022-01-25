@@ -2,12 +2,13 @@
 align_numbers <- function(x, integer_digits=5, decimal_digits=5) {
   magnitude <- log10(ifelse(abs(x) < 1, 1, abs(x)))
   use_sci <- magnitude + 1 > integer_digits
+  x <- round(x, decimal_digits)
 
   sign_char <- ifelse(x < 0, "-", " ")
 
   integer_char <- ifelse(use_sci, "", formatC(as.integer(abs(trunc(x)))))
 
-  dec_part <- round(abs(x - trunc(x)), decimal_digits)
+  dec_part <- abs(x - trunc(x))
   decs <- format(dec_part, scientific=FALSE, nsmall=decimal_digits, drop0trailing=TRUE)
   decimal_char <- substr(decs, 2, nchar(decs))
 
