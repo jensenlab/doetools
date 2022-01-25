@@ -1,12 +1,20 @@
 
 align_numbers <- function(x, integer_digits=5, decimal_digits=5) {
-  use_sci <- log10(ifelse(abs(x) < 1, 1, abs(x))) >= integer_digits
-  x <- round(x, decimal_digits)
-  ints <- stringr::str_replace(format(trunc(x)), "^ *0$", " ")
+  magnitude <- log10(ifelse(abs(x) < 1, 1, abs(x)))
+  use_sci <- magnitude + 1 > integer_digits
+
+  sign_char <- ifelse(x < 0, "-", " ")
+
+  integer_char <- ifelse(use_sci, "", formatC(as.integer(abs(trunc(x)))))
+
   dec_part <- abs(x - trunc(x))
-  decs <- format(dec_part, scientific=FALSE, nsmall=decimal_digits)
-  numstrs <- stringr::str_replace_all(paste0(ints, substr(decs, 2, nchar(decs))), c("0+$"="", "^ +"=""))
-  parts <- stringr::str_split_fixed(ifelse(use_sci, format(x), numstrs), "\\.", 2)
+  decs <- format(dec_part, scientific=FALSE, nsmall=decimal_digits, drop0trailing=TRUE)
+  decimal_char <- substr(decs, 2, nchar(decs))
+
+  num_char <- ifelse(use_sci,
+                     prettyNum(x, drop0trailing=TRUE),
+                     paste0(sign_char, ifelse(integer_char=="0", "", integer_char), decimal_char))
+  parts <- stringr::str_split_fixed(num_char, "\\.", 2)
   paste0(format(parts[ ,1], justify="right"), ".", format(parts[ ,2], justify="left"))
 }
 
