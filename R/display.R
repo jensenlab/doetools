@@ -19,6 +19,10 @@ align_numbers <- function(x, integer_digits=5, decimal_digits=5) {
   paste0(format(parts[ ,1], justify="right"), ".", format(parts[ ,2], justify="left"))
 }
 
+pillar_numbers <- function(x, width=12) {
+  as.character(format(pillar::pillar_shaft(x), width=width))
+}
+
 #' Show effect sizes.
 #'
 #' Prints the effect sizes for a vector of coefficients from a linear model.
@@ -43,7 +47,7 @@ show_effects <- function(...) UseMethod("show_effects")
 
 #' @describeIn show_effects Base method for named numeric vectors
 #' @export
-show_effects.default <- function(coefs, scaling=1, no_scale="(Intercept)", ordered="none", colsep="   ", ...) {
+show_effects.default <- function(coefs, scaling=1, no_scale="(Intercept)", ordered="none", colsep="   ", aligner=align_numbers, ...) {
   stopifnot(ordered %in% c("none", "abs", "signed"))
   coefs[!(names(coefs) %in% no_scale)] <- coefs[!(names(coefs) %in% no_scale)] * scaling
   if (ordered == "none") {
@@ -58,7 +62,7 @@ show_effects.default <- function(coefs, scaling=1, no_scale="(Intercept)", order
   strs <- paste0(
     format(names(coefs), justify="right"),
     colsep,
-    align_numbers(coefs, ...),
+    aligner(coefs, ...),
     "\n"
   )
   for (s in strs) {
