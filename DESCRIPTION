@@ -1,7 +1,7 @@
 Package: doetools
 Type: Package
 Title: Tools for Design of Experiments
-Version: 0.1.8
+Version: 0.1.9
 Author: Jensen Lab
 Maintainer: Jensen Lab <software@jensenlab.net>
 Description: Helper functions for building, analyzing, and 
@@ -13,7 +13,9 @@ Imports:
     grid,
     dplyr,
     stringr,
-    pillar
+    pillar,
+    ggplot2,
+    ggpubr
 RoxygenNote: 7.1.1
 Suggests: 
     rmarkdown,

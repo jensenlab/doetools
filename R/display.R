@@ -30,6 +30,7 @@ pillar_numbers <- function(x, width=12) {
 #' @param coefs A named numeric vector of coefficients from a `lm` model.
 #' @param model A linear model produced by `lm`.
 #' @param scaling Scale all non-intercept coefficients by this factor (default=1).
+#' @param n Show up to `n` effects.
 #' @param no_scale Character vector of effects to not scale (default=`"(Intercept)"`).
 #' @param ordered By default (`ordered="none"`), the effects are ordered as they appear in the input.
 #'   Setting `order="abs"` orders by absolute value (magnitude), and `order="signed"` shows in
@@ -47,7 +48,7 @@ show_effects <- function(...) UseMethod("show_effects")
 
 #' @describeIn show_effects Base method for named numeric vectors
 #' @export
-show_effects.default <- function(coefs, scaling=1, no_scale="(Intercept)", ordered="none", colsep="   ", aligner=align_numbers, ...) {
+show_effects.default <- function(coefs, scaling=1, n=length(coefs), no_scale="(Intercept)", ordered="none", colsep="   ", aligner=align_numbers, ...) {
   stopifnot(ordered %in% c("none", "abs", "signed"))
   coefs[!(names(coefs) %in% no_scale)] <- coefs[!(names(coefs) %in% no_scale)] * scaling
   if (ordered == "none") {
@@ -65,8 +66,8 @@ show_effects.default <- function(coefs, scaling=1, no_scale="(Intercept)", order
     aligner(coefs, ...),
     "\n"
   )
-  for (s in strs) {
-    cat(s)
+  for (i in 1:n) {
+    cat(strs[i])
   }
 }
 

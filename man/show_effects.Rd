@@ -11,9 +11,11 @@ show_effects(...)
 \method{show_effects}{default}(
   coefs,
   scaling = 1,
+  n = length(coefs),
   no_scale = "(Intercept)",
   ordered = "none",
   colsep = "   ",
+  aligner = align_numbers,
   ...
 )
 
@@ -23,6 +25,8 @@ show_effects(...)
 \item{coefs}{A named numeric vector of coefficients from a `lm` model.}
 
 \item{scaling}{Scale all non-intercept coefficients by this factor (default=1).}
+
+\item{n}{Show up to `n` effects.}
 
 \item{no_scale}{Character vector of effects to not scale (default=`"(Intercept)"`).}
 
