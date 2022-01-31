@@ -9,7 +9,7 @@
 #' @author Paul Jensen, \email{software@jensenlab.net}
 #'
 #' @export
-effects <- function(model, scaling=1, no_scale="(Intercept)", intercept=FALSE) {
+get_effects <- function(model, scaling=1, no_scale="(Intercept)", intercept=FALSE) {
   effs <- coefficients(model)
   effs[!(names(effs) %in% no_scale)] <- effs[!(names(effs) %in% no_scale)] * scaling
   if (!intercept) {
