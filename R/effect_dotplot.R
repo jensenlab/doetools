@@ -1,4 +1,23 @@
 
+#' Get effects from a linear model.
+#'
+#' @param model A linear model object (`lm` or `rsm`).
+#' @param scaling Multiply all model coefficients by this factor.
+#' @param no_scale Character vector of effects to not scale (default=`"(Intercept)"`).
+#' @param intercept When `FALSE` (default), exclude the intercept.
+#'
+#' @author Paul Jensen, \email{software@jensenlab.net}
+#'
+#' @export
+effects <- function(model, scaling=1, no_scale="(Intercept)", intercept=FALSE) {
+  effs <- coefficients(model)
+  effs[!(names(effs) %in% no_scale)] <- effs[!(names(effs) %in% no_scale)] * scaling
+  if (!intercept) {
+    effs[!(names(effs) %in% no_scale)]
+  }
+  effs
+}
+
 #' Create a dot plot of effects.
 #'
 #' @param model Linear model.
@@ -30,5 +49,6 @@ effect_dotplot <- function(model, scaling=1, limits=NULL, ...) {
                      axis.text.y = ggplot2::element_blank(),
                      axis.ticks.y = ggplot2::element_blank(),
                      legend.position = "bottom")
+    + ggplot2::xlab("effect size")
     + ggplot2::ylab(""))
 }
