@@ -1,7 +1,7 @@
 Package: doetools
 Type: Package
 Title: Tools for Design of Experiments
-Version: 0.1.11
+Version: 0.1.12
 Author: Jensen Lab
 Maintainer: Jensen Lab <software@jensenlab.net>
 Description: Helper functions for building, analyzing, and 
