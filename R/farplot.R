@@ -30,6 +30,8 @@
 #'   factor types using the above rules and the classes of the columns in \code{factors}.
 #' @param factor_colors A 3-item vector specifying the colors for negative, zero, and positive symbols.
 #'   Default: negative=red, zero=gray, positive=black.
+#' @param factor_fills A 3-item vector specifying the fills for negative, zero, and positive symbols.
+#'   Default: negative=red, zero=white, positive=black.
 #' @param show_prediction If true (default), make and display predictions for \code{lm} and \code{rsm}
 #'   objects.
 #' @param color_signs If true (the default), the \code{-}, \code{0}, and \code{+} signs are colored
@@ -185,6 +187,7 @@ make_farplot <- function(factors, response, prediction=NULL,
                          response_name="response",
 
                          factor_colors=c("red", "gray", "black"),
+                         factor_fills=c("red", "white", "black"),
                          color_signs=TRUE,
                          label_chars=2,
                          factor_size=1.0,
@@ -336,8 +339,9 @@ make_farplot <- function(factors, response, prediction=NULL,
       colors <- rep(factor_colors[2], nr)
       colors[sign(f) < 0] <- factor_colors[1]
       colors[sign(f) > 0] <- factor_colors[3]
-      fills <- colors
-      fills[f == 0] <- "white"
+      fills <- rep(factor_fills[2], nr)
+      fills[sign(f) < 0] <- factor_fills[1]
+      fills[sign(f) > 0] <- factor_fills[3]
       grid.points(
         x=unit(1:nr, "native"),
         y=unit(rep(nf+0.5-i, nr), "line"),

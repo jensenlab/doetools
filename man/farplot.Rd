@@ -32,6 +32,9 @@ factor types using the above rules and the classes of the columns in \code{facto
 \item{factor_colors}{A 3-item vector specifying the colors for negative, zero, and positive symbols.
 Default: negative=red, zero=gray, positive=black.}
 
+\item{factor_fills}{A 3-item vector specifying the fills for negative, zero, and positive symbols.
+Default: negative=red, zero=white, positive=black.}
+
 \item{color_signs}{If true (the default), the \code{-}, \code{0}, and \code{+} signs are colored
 using \code{factor_colors}.}
 
