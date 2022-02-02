@@ -1,7 +1,7 @@
 Package: doetools
 Type: Package
 Title: Tools for Design of Experiments
-Version: 0.1.13
+Version: 0.1.14
 Author: Jensen Lab
 Maintainer: Jensen Lab <software@jensenlab.net>
 Description: Helper functions for building, analyzing, and 
@@ -21,6 +21,5 @@ RoxygenNote: 7.1.1
 Suggests: 
     rmarkdown,
     knitr,
-    daewr,
     rsm
 VignetteBuilder: knitr
