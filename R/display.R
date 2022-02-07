@@ -1,5 +1,8 @@
 
 align_numbers <- function(x, integer_digits=5, decimal_digits=5) {
+  use_na <- is.na(x)
+  x[use_na] <- 0.0
+
   magnitude <- log10(ifelse(abs(x) < 1, 1, abs(x)))
   use_sci <- magnitude + 1 > integer_digits
   x <- round(x, decimal_digits)
@@ -16,6 +19,7 @@ align_numbers <- function(x, integer_digits=5, decimal_digits=5) {
                      prettyNum(x, drop0trailing=TRUE),
                      paste0(sign_char, ifelse(integer_char=="0", "", integer_char), decimal_char))
   parts <- stringr::str_split_fixed(num_char, "\\.", 2)
+  parts[use_na,1] <- "NA"
   paste0(format(parts[ ,1], justify="right"), ".", format(parts[ ,2], justify="left"))
 }
 
