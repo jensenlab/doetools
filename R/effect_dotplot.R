@@ -1,10 +1,10 @@
 
 #' Get effects from a linear model.
 #'
-#' @param model A linear model object (`lm` or `rsm`).
+#' @param model A linear model object (\code{lm} or \code{rsm}).
 #' @param scaling Multiply all model coefficients by this factor.
-#' @param no_scale Character vector of effects to not scale (default=`"(Intercept)"`).
-#' @param intercept When `FALSE` (default), exclude the intercept.
+#' @param no_scale Character vector of effects to not scale (default=\code{"(Intercept)"}).
+#' @param intercept When \code{FALSE} (default), exclude the intercept.
 #'
 #' @author Paul Jensen, \email{software@jensenlab.net}
 #'
@@ -22,8 +22,8 @@ get_effects <- function(model, scaling=1, no_scale="(Intercept)", intercept=FALS
 #'
 #' @param model Linear model.
 #' @param scaling Multiply all model coefficients by this factor.
-#' @param limits Numeric vector `c(lower, upper)` Effects outsize this range are moved to the range boundaries.
-#' @param ... Optional arguments for `ggplot2::geom_dotplot`.
+#' @param limits Numeric vector \code{c(lower, upper)} Effects outsize this range are moved to the range boundaries.
+#' @param ... Optional arguments for \code{ggplot2::geom_dotplot}.
 #'
 #' @author Paul Jensen, \email{software@jensenlab.net}
 #'

@@ -31,16 +31,16 @@ pillar_numbers <- function(x, width=12) {
 #'
 #' Prints the effect sizes for a vector of coefficients from a linear model.
 #'
-#' @param coefs A named numeric vector of coefficients from a `lm` model.
-#' @param model A linear model produced by `lm`.
+#' @param coefs A named numeric vector of coefficients from a \code{lm} model.
+#' @param model A linear model produced by \code{lm}.
 #' @param scaling Scale all non-intercept coefficients by this factor (default=1).
-#' @param n Show up to `n` effects.
-#' @param no_scale Character vector of effects to not scale (default=`"(Intercept)"`).
-#' @param ordered By default (`ordered="none"`), the effects are ordered as they appear in the input.
-#'   Setting `order="abs"` orders by absolute value (magnitude), and `order="signed"` shows in
+#' @param n Show up to \code{n} effects.
+#' @param no_scale Character vector of effects to not scale (default=\code{"(Intercept)"}).
+#' @param ordered By default (\code{ordered="none"}), the effects are ordered as they appear in the input.
+#'   Setting \code{order="abs"} orders by absolute value (magnitude), and \code{order="signed"} shows in
 #'   numerical order (largest to smallest, respecting sign).
-#' @param colsep Separator between effect names and value (default=`"   "`).
-#' @param intercept When `TRUE` (default), show the intercept as an effect.
+#' @param colsep Separator between effect names and value (default=\code{"   "}).
+#' @param intercept When \code{TRUE} (default), show the intercept as an effect.
 #' @param integer_digits Max number of digits to display left of the decimal point. Larger numbers
 #'   are displayed using scientific notation.
 #' @param decimal_digits Effects are rounded to this many digits, and training zeros are not shown.

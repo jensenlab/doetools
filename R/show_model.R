@@ -3,16 +3,17 @@
 
 #' Show a compact model summary
 #'
-#' Prints a modified version of the defaults `lm` model summary. The model summary statistics
+#' Prints a modified version of the defaults \code{lm} model summary. The model summary statistics
 #' are shown on top, followed by the (sorted) table of coefficients. The function call and
 #' residual information is omitted.
 #'
-#' The function is based on the `print.summary.lm` function in `base`.
+#' The function is based on the \code{print.summary.lm} function in \code{base}. Function parameters not documented
+#' here are described in \code{print.summary.lm}.
 #'
 #' @param n_coefs Number of coefficients to display (NA=all).
 #' @param order_coefs Function used to order coefficients. Default sorts by decending magnitude.
-#' @param show_coefs If `FALSE`, skip the coefficient table.
-#' @param show_fit If `FALSE`, skip the model fit statistics (R^2, F, etc.)
+#' @param show_coefs If \code{FALSE}, skip the coefficient table.
+#' @param show_fit If \code{FALSE}, skip the model fit statistics (R^2, F, etc.)
 #'
 #' @export
 show_model <-

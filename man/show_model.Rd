@@ -21,15 +21,16 @@ show_model(
 
 \item{order_coefs}{Function used to order coefficients. Default sorts by decending magnitude.}
 
-\item{show_coefs}{If `FALSE`, skip the coefficient table.}
+\item{show_coefs}{If \code{FALSE}, skip the coefficient table.}
 
-\item{show_fit}{If `FALSE`, skip the model fit statistics (R^2, F, etc.)}
+\item{show_fit}{If \code{FALSE}, skip the model fit statistics (R^2, F, etc.)}
 }
 \description{
-Prints a modified version of the defaults `lm` model summary. The model summary statistics
+Prints a modified version of the defaults \code{lm} model summary. The model summary statistics
 are shown on top, followed by the (sorted) table of coefficients. The function call and
 residual information is omitted.
 }
 \details{
-The function is based on the `print.summary.lm` function in `base`.
+The function is based on the \code{print.summary.lm} function in \code{base}. Function parameters not documented
+here are described in \code{print.summary.lm}.
 }

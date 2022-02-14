@@ -11,9 +11,9 @@ effect_dotplot(model, scaling = 1, limits = NULL, ...)
 
 \item{scaling}{Multiply all model coefficients by this factor.}
 
-\item{limits}{Numeric vector `c(lower, upper)` Effects outsize this range are moved to the range boundaries.}
+\item{limits}{Numeric vector \code{c(lower, upper)} Effects outsize this range are moved to the range boundaries.}
 
-\item{...}{Optional arguments for `ggplot2::geom_dotplot`.}
+\item{...}{Optional arguments for \code{ggplot2::geom_dotplot}.}
 }
 \description{
 Create a dot plot of effects.

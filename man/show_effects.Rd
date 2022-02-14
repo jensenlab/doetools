@@ -22,23 +22,23 @@ show_effects(...)
 \method{show_effects}{lm}(model, intercept = TRUE, ...)
 }
 \arguments{
-\item{coefs}{A named numeric vector of coefficients from a `lm` model.}
+\item{coefs}{A named numeric vector of coefficients from a \code{lm} model.}
 
 \item{scaling}{Scale all non-intercept coefficients by this factor (default=1).}
 
-\item{n}{Show up to `n` effects.}
+\item{n}{Show up to \code{n} effects.}
 
-\item{no_scale}{Character vector of effects to not scale (default=`"(Intercept)"`).}
+\item{no_scale}{Character vector of effects to not scale (default=\code{"(Intercept)"}).}
 
-\item{ordered}{By default (`ordered="none"`), the effects are ordered as they appear in the input.
-Setting `order="abs"` orders by absolute value (magnitude), and `order="signed"` shows in
+\item{ordered}{By default (\code{ordered="none"}), the effects are ordered as they appear in the input.
+Setting \code{order="abs"} orders by absolute value (magnitude), and \code{order="signed"} shows in
 numerical order (largest to smallest, respecting sign).}
 
-\item{colsep}{Separator between effect names and value (default=`"   "`).}
+\item{colsep}{Separator between effect names and value (default=\code{"   "}).}
 
-\item{model}{A linear model produced by `lm`.}
+\item{model}{A linear model produced by \code{lm}.}
 
-\item{intercept}{When `TRUE` (default), show the intercept as an effect.}
+\item{intercept}{When \code{TRUE} (default), show the intercept as an effect.}
 
 \item{integer_digits}{Max number of digits to display left of the decimal point. Larger numbers
 are displayed using scientific notation.}

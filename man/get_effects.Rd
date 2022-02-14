@@ -7,13 +7,13 @@
 get_effects(model, scaling = 1, no_scale = "(Intercept)", intercept = FALSE)
 }
 \arguments{
-\item{model}{A linear model object (`lm` or `rsm`).}
+\item{model}{A linear model object (\code{lm} or \code{rsm}).}
 
 \item{scaling}{Multiply all model coefficients by this factor.}
 
-\item{no_scale}{Character vector of effects to not scale (default=`"(Intercept)"`).}
+\item{no_scale}{Character vector of effects to not scale (default=\code{"(Intercept)"}).}
 
-\item{intercept}{When `FALSE` (default), exclude the intercept.}
+\item{intercept}{When \code{FALSE} (default), exclude the intercept.}
 }
 \description{
 Get effects from a linear model.
