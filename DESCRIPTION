@@ -1,7 +1,7 @@
 Package: doetools
 Type: Package
 Title: Tools for Design of Experiments
-Version: 0.1.17
+Version: 0.1.19
 Author: Jensen Lab
 Maintainer: Jensen Lab <software@jensenlab.net>
 Description: Helper functions for building, analyzing, and 
@@ -11,6 +11,7 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     grid,
+    magrittr,
     dplyr,
     stringr,
     pillar,
